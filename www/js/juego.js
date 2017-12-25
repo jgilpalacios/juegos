@@ -6,7 +6,7 @@ var app={
     velocidadY = 0;
     puntuacion = 0;
     puntuacionMax=0;//máximo conseguido
-    nivel = 0 //  dos niveles
+    nivel = 0; //  dos niveles
     
     alto  = document.documentElement.clientHeight;
     ancho = document.documentElement.clientWidth;
@@ -94,7 +94,6 @@ var app={
 		nivel=1;//pasamos de nivel
 		obstaculo = game.add.sprite(app.inicioX(), app.inicioY(), 'obstaculo');
 		game.physics.arcade.enable(obstaculo);
-		
 	}
     }
 
