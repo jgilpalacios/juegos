@@ -101,7 +101,7 @@ var app={
 
     if (puntuacion > 0){
       //dificultad = dificultad + 1;
-      dificultad=puntuacion-nivel*puntuacion;// si perdemos puntos lo suavizamos
+      dificultad=puntuacion-nivel*20;// si perdemos puntos lo suavizamos
     }
   },
 
