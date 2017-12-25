@@ -5,6 +5,7 @@ var app={
     velocidadX = 0;
     velocidadY = 0;
     puntuacion = 0;
+    puntuacionMax=0;//máximo conseguido
     
     alto  = document.documentElement.clientHeight;
     ancho = document.documentElement.clientWidth;
@@ -24,7 +25,7 @@ var app={
     }
 
     function create() {
-      scoreText = game.add.text(16, 16, puntuacion, { fontSize: '100px', fill: '#757676' });
+      scoreText = game.add.text(16, 16, 'MAX:'+puntuacionMax+'; '+puntuacion, { fontSize: '100px', fill: '#757676' });
       
       objetivo = game.add.sprite(app.inicioX(), app.inicioY(), 'objetivo');
       bola = game.add.sprite(app.inicioX(), app.inicioY(), 'bola');
@@ -53,6 +54,7 @@ var app={
     if (puntuacion > -10){ // solo bajamos hasta -10
 	puntuacion--;
     	scoreText.text = puntuacion;
+        scoreText.text='MAX:'+puntuacionMax+'; '+puntuacion;
     }
     
     bola.body.x = app.inicioX(); //la recolocamos
@@ -66,8 +68,10 @@ var app={
 
   incrementaPuntuacion: function(){
     puntuacion = puntuacion+1;
-    scoreText.text = puntuacion;
-
+    if (puntuacion>puntuacionMax) puntuacionMax=puntuacion;
+    scoreText.text='MAX:'+puntuacionMax+'; '+puntuacion;
+    //scoreText.text = puntuacion;
+ 
     objetivo.body.x = app.inicioX();
     objetivo.body.y = app.inicioY();
 
