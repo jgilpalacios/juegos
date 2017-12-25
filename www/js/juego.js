@@ -50,13 +50,18 @@ var app={
   },
 
   decrementaPuntuacion: function(){
-    puntuacion = puntuacion-1;
-    scoreText.text = puntuacion;
+    if (puntuacion > -10){ // solo bajamos hasta -10
+	puntuacion--;
+    	scoreText.text = puntuacion;
+    }
+    
+    bola.body.x = app.inicioX(); //la recolocamos
+    bola.body.y = app.inicioY();
 
-    if (bola.body.x < 5) bola.body.x=5; //si tocamos lo recolocamos un poco más retirado
+    /*if (bola.body.x < 5) bola.body.x=5; //si tocamos lo recolocamos un poco más retirado
     if (bola.body.y < 5) bola.body.y=5; 
     if (bola.body.x > ancho-5) bola.body.x=ancho-5; //si tocamos lo recolocamos un poco más retirado
-    if (bola.body.y > alto-5) bola.body.y=alto-5;
+    if (bola.body.y > alto-5) bola.body.y=alto-5;*/
   },
 
   incrementaPuntuacion: function(){
