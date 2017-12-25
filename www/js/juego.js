@@ -24,6 +24,7 @@ var app={
       game.load.image('bola', 'assets/bola.png');
       game.load.image('objetivo', 'assets/objetivo.png');
       game.load.image('obstaculo', 'assets/obstaculo.png');
+      game.load.image('obstaculo2', 'assets/obstaculo2.png');
     }
 
     function create() {
@@ -33,7 +34,9 @@ var app={
       objetivo = game.add.sprite(app.inicioX(), app.inicioY(), 'objetivo');
       bola = game.add.sprite(app.inicioX(), app.inicioY(), 'bola');
       obstaculo = game.add.sprite(alto+ancho, alto+ancho, 'obstaculo'); //fuera del tablero
+      obstaculo2 = game.add.sprite(alto+ancho, alto+ancho, 'obstaculo2'); //fuera del tablero
 
+      game.physics.arcade.enable(obstaculo2);
       game.physics.arcade.enable(obstaculo);
       game.physics.arcade.enable(bola);
       game.physics.arcade.enable(objetivo);
@@ -50,6 +53,7 @@ var app={
       
       game.physics.arcade.overlap(bola, objetivo, app.incrementaPuntuacion, null, this);
       game.physics.arcade.overlap(bola, obstaculo, app.decrementaObstaculo, null, this);
+      game.physics.arcade.overlap(bola, obstaculo2, app.decrementaObstaculo2, null, this);
     }
 
     var estados = { preload: preload, create: create, update: update };
@@ -74,12 +78,21 @@ var app={
   
   decrementaObstaculo: function(){
 	if (puntuacion > -10){ // solo bajamos hasta -10
-		puntuacion--;puntuacion--;
+		puntuacion-=2;
     		scoreText.text = puntuacion;
         //maxText.text='MAX:'+puntuacionMax;
 	}
 	obstaculo.body.x = app.inicioX();
 	obstaculo.body.y = app.inicioY();
+  },
+  decrementaObstaculo2: function(){
+	if (puntuacion > -10){ // solo bajamos hasta -10
+		puntuacion-=3;
+    		scoreText.text = puntuacion;
+        //maxText.text='MAX:'+puntuacionMax;
+	}
+	obstaculo2.body.x = app.inicioX();
+	obstaculo2.body.y = app.inicioY();
   },
 
   incrementaPuntuacion: function(){
@@ -96,6 +109,13 @@ var app={
 		nivel=1;//pasamos de nivel
 		obstaculo.body.x = app.inicioX(); //hacemos visible el obstaculo
 		obstaculo.body.y = app.inicioY();
+	}
+    }
+    if(nivel==1){
+	if(puntuacion>40){
+		nivel=2;//pasamos de nivel
+		obstaculo2.body.x = app.inicioX(); //hacemos visible el obstaculo
+		obstaculo2.body.y = app.inicioY();
 	}
     }
 
