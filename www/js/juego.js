@@ -32,7 +32,9 @@ var app={
       
       objetivo = game.add.sprite(app.inicioX(), app.inicioY(), 'objetivo');
       bola = game.add.sprite(app.inicioX(), app.inicioY(), 'bola');
-      
+      obstaculo = game.add.sprite(alto+ancho, alto+ancho, 'obstaculo'); //fuera del tablero
+
+      game.physics.arcade.enable(obstaculo);
       game.physics.arcade.enable(bola);
       game.physics.arcade.enable(objetivo);
 
@@ -47,7 +49,7 @@ var app={
       bola.body.velocity.x = (velocidadX * (-1 * factorDificultad));
       
       game.physics.arcade.overlap(bola, objetivo, app.incrementaPuntuacion, null, this);
-      if(nivel==1) game.physics.arcade.overlap(bola, obstaculo, app.decrementaObstaculo, null, this);
+      game.physics.arcade.overlap(bola, obstaculo, app.decrementaObstaculo, null, this);
     }
 
     var estados = { preload: preload, create: create, update: update };
@@ -92,8 +94,8 @@ var app={
     if(nivel==0){
 	if(puntuacion>20){
 		nivel=1;//pasamos de nivel
-		obstaculo = game.add.sprite(app.inicioX(), app.inicioY(), 'obstaculo');
-		game.physics.arcade.enable(obstaculo);
+		obstaculo.body.x = app.inicioX(); //hacemos visible el obstaculo
+		obstaculo.body.y = app.inicioY();
 	}
     }
 
