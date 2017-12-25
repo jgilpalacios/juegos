@@ -25,6 +25,7 @@ var app={
       game.load.image('objetivo', 'assets/objetivo.png');
       game.load.image('obstaculo', 'assets/obstaculo.png');
       game.load.image('obstaculo2', 'assets/obstaculo2.png');
+      game.load.image('obstaculo3', 'assets/obstaculo3.png');
     }
 
     function create() {
@@ -35,7 +36,9 @@ var app={
       bola = game.add.sprite(app.inicioX(), app.inicioY(), 'bola');
       obstaculo = game.add.sprite(alto+ancho, alto+ancho, 'obstaculo'); //fuera del tablero
       obstaculo2 = game.add.sprite(alto+ancho, alto+ancho, 'obstaculo2'); //fuera del tablero
+      obstaculo3 = game.add.sprite(alto+ancho, alto+ancho, 'obstaculo3'); //fuera del tablero
 
+      game.physics.arcade.enable(obstaculo3);
       game.physics.arcade.enable(obstaculo2);
       game.physics.arcade.enable(obstaculo);
       game.physics.arcade.enable(bola);
@@ -54,6 +57,7 @@ var app={
       game.physics.arcade.overlap(bola, objetivo, app.incrementaPuntuacion, null, this);
       game.physics.arcade.overlap(bola, obstaculo, app.decrementaObstaculo, null, this);
       game.physics.arcade.overlap(bola, obstaculo2, app.decrementaObstaculo2, null, this);
+      game.physics.arcade.overlap(bola, obstaculo3, app.decrementaObstaculo3, null, this);
     }
 
     var estados = { preload: preload, create: create, update: update };
@@ -94,6 +98,15 @@ var app={
 	obstaculo2.body.x = app.inicioX();
 	obstaculo2.body.y = app.inicioY();
   },
+  decrementaObstaculo3: function(){
+	if (puntuacion > -10){ // solo bajamos hasta -10
+		puntuacion-=4;
+    		scoreText.text = puntuacion;
+        //maxText.text='MAX:'+puntuacionMax;
+	}
+	obstaculo3.body.x = app.inicioX();
+	obstaculo3.body.y = app.inicioY();
+  },
 
   incrementaPuntuacion: function(){
     puntuacion = puntuacion+1;
@@ -116,6 +129,13 @@ var app={
 		nivel=2;//pasamos de nivel
 		obstaculo2.body.x = app.inicioX(); //hacemos visible el obstaculo
 		obstaculo2.body.y = app.inicioY();
+	}
+    }
+    if(nivel==2){
+	if(puntuacion>60){
+		nivel=3;//pasamos de nivel
+		obstaculo3.body.x = app.inicioX(); //hacemos visible el obstaculo
+		obstaculo3.body.y = app.inicioY();
 	}
     }
 
