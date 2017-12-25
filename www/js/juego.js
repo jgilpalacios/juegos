@@ -68,23 +68,13 @@ var app={
     if (puntuacion > -10){ // solo bajamos hasta -10
 	puntuacion--;
     	scoreText.text = puntuacion;
-        //maxText.text='MAX:'+puntuacionMax;
     }
-    
-    /*bola.body.x = app.inicioX(); //la recolocamos
-    bola.body.y = app.inicioY();*/
-
-    /*if (bola.body.x < 5) bola.body.x=5; //si tocamos lo recolocamos un poco más retirado
-    if (bola.body.y < 5) bola.body.y=5; 
-    if (bola.body.x > ancho-5) bola.body.x=ancho-5; //si tocamos lo recolocamos un poco más retirado
-    if (bola.body.y > alto-5) bola.body.y=alto-5;*/
   },
-  
+
   decrementaObstaculo: function(){
 	if (puntuacion > -10){ // solo bajamos hasta -10
 		puntuacion-=2;
     		scoreText.text = puntuacion;
-        //maxText.text='MAX:'+puntuacionMax;
 	}
 	obstaculo.body.x = app.inicioX();
 	obstaculo.body.y = app.inicioY();
@@ -102,7 +92,6 @@ var app={
 	if (puntuacion > -10){ // solo bajamos hasta -10
 		puntuacion-=4;
     		scoreText.text = puntuacion;
-        //maxText.text='MAX:'+puntuacionMax;
 	}
 	obstaculo3.body.x = app.inicioX();
 	obstaculo3.body.y = app.inicioY();
@@ -113,7 +102,6 @@ var app={
     if (puntuacion>puntuacionMax) puntuacionMax=puntuacion;
     scoreText.text = puntuacion;
     maxText.text='MAX:'+puntuacionMax;
-    //scoreText.text = puntuacion;
     
     objetivo.body.x = app.inicioX();
     objetivo.body.y = app.inicioY();
@@ -139,7 +127,7 @@ var app={
 	}
     }
 
-    if (puntuacion > 0){
+    if (puntuacion > nivel*20){
       //dificultad = dificultad + 1;
       dificultad=puntuacion-nivel*20;// si perdemos puntos lo suavizamos
     }
