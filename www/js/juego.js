@@ -55,7 +55,7 @@ var app={
 
     if (bola.body.x < 5) bola.body.x=5; //si tocamos lo recolocamos un poco más retirado
     if (bola.body.y < 5) bola.body.y=5; 
-    if (bola.body.x < ancho-5) bola.body.x=ancho-5; //si tocamos lo recolocamos un poco más retirado
+    if (bola.body.x > ancho-5) bola.body.x=ancho-5; //si tocamos lo recolocamos un poco más retirado
     if (bola.body.y > alto-5) bola.body.y=alto-5;
   },
 
