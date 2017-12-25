@@ -47,6 +47,7 @@ var app={
       bola.body.velocity.x = (velocidadX * (-1 * factorDificultad));
       
       game.physics.arcade.overlap(bola, objetivo, app.incrementaPuntuacion, null, this);
+      if(estado==1) game.physics.arcade.overlap(bola, obstaculo, app.decrementaObstaculo, null, this);
     }
 
     var estados = { preload: preload, create: create, update: update };
@@ -60,13 +61,23 @@ var app={
         //maxText.text='MAX:'+puntuacionMax;
     }
     
-    bola.body.x = app.inicioX(); //la recolocamos
-    bola.body.y = app.inicioY();
+    /*bola.body.x = app.inicioX(); //la recolocamos
+    bola.body.y = app.inicioY();*/
 
     /*if (bola.body.x < 5) bola.body.x=5; //si tocamos lo recolocamos un poco más retirado
     if (bola.body.y < 5) bola.body.y=5; 
     if (bola.body.x > ancho-5) bola.body.x=ancho-5; //si tocamos lo recolocamos un poco más retirado
     if (bola.body.y > alto-5) bola.body.y=alto-5;*/
+  },
+  
+  decrementaObstaculo: function(){
+	if (puntuacion > -10){ // solo bajamos hasta -10
+		puntuacion--;puntuacion--;
+    		scoreText.text = puntuacion;
+        //maxText.text='MAX:'+puntuacionMax;
+	}
+	obstaculo.body.x = app.inicioX();
+	obstaculo.body.y = app.inicioY();
   },
 
   incrementaPuntuacion: function(){
@@ -75,13 +86,21 @@ var app={
     scoreText.text = puntuacion;
     maxText.text='MAX:'+puntuacionMax;
     //scoreText.text = puntuacion;
- 
+    
     objetivo.body.x = app.inicioX();
     objetivo.body.y = app.inicioY();
+    if(nivel==0){
+	if(puntuacion>20){
+		nivel=1;//pasamos de nivel
+		obstaculo = game.add.sprite(app.inicioX(), app.inicioY(), 'obstaculo');
+		game.physics.arcade.enable(obstaculo);
+		
+	}
+    }
 
     if (puntuacion > 0){
       //dificultad = dificultad + 1;
-      dificultad=puntuacion;// si perdemos puntos lo suavizamos
+      dificultad=puntuacion-nivel*puntuacion;// si perdemos puntos lo suavizamos
     }
   },
 
