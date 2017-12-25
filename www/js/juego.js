@@ -127,9 +127,10 @@ var app={
 	}
     }
 
-    if (puntuacion > nivel*20){
+    if (puntuacion > 0){
       //dificultad = dificultad + 1;
       dificultad=puntuacion-nivel*20;// si perdemos puntos lo suavizamos
+      if (dificultad<0) dificultad=0; // no permitimos dificultades negativas
     }
   },
 
