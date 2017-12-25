@@ -6,6 +6,7 @@ var app={
     velocidadY = 0;
     puntuacion = 0;
     puntuacionMax=0;//máximo conseguido
+    nivel = 0 //  dos niveles
     
     alto  = document.documentElement.clientHeight;
     ancho = document.documentElement.clientWidth;
@@ -22,11 +23,12 @@ var app={
       game.stage.backgroundColor = '#f27d0c';
       game.load.image('bola', 'assets/bola.png');
       game.load.image('objetivo', 'assets/objetivo.png');
+      game.load.image('obstaculo', 'assets/obstaculo.png');
     }
 
     function create() {
       maxText = game.add.text(16, 16, 'MAX:'+puntuacionMax, { fontSize: '50px', fill: '#757676' });
-      scoreText = game.add.text(16, 32, puntuacion, { fontSize: '50px', fill: '#757676' });
+      scoreText = game.add.text(16, 66, puntuacion, { fontSize: '50px', fill: '#757676' });
       
       objetivo = game.add.sprite(app.inicioX(), app.inicioY(), 'objetivo');
       bola = game.add.sprite(app.inicioX(), app.inicioY(), 'bola');
