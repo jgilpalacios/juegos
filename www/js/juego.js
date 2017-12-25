@@ -47,7 +47,7 @@ var app={
       bola.body.velocity.x = (velocidadX * (-1 * factorDificultad));
       
       game.physics.arcade.overlap(bola, objetivo, app.incrementaPuntuacion, null, this);
-      if(estado==1) game.physics.arcade.overlap(bola, obstaculo, app.decrementaObstaculo, null, this);
+      if(nivel==1) game.physics.arcade.overlap(bola, obstaculo, app.decrementaObstaculo, null, this);
     }
 
     var estados = { preload: preload, create: create, update: update };
