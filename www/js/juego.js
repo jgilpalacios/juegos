@@ -52,6 +52,9 @@ var app={
   decrementaPuntuacion: function(){
     puntuacion = puntuacion-1;
     scoreText.text = puntuacion;
+
+    objetivo.body.x = app.inicioX(); //si tocamos lo recolocamos
+    objetivo.body.y = app.inicioY();
   },
 
   incrementaPuntuacion: function(){
@@ -62,16 +65,17 @@ var app={
     objetivo.body.y = app.inicioY();
 
     if (puntuacion > 0){
-      dificultad = dificultad + 1;
+      //dificultad = dificultad + 1;
+      dificultad=puntuacion;// si perdemos puntos lo suavizamos
     }
   },
 
   inicioX: function(){
-    return app.numeroAleatorioHasta(ancho - DIAMETRO_BOLA );
+    return app.numeroAleatorioHasta(ancho - 1.1*DIAMETRO_BOLA );//no comenzamos tocando los límites 1.1
   },
 
   inicioY: function(){
-    return app.numeroAleatorioHasta(alto - DIAMETRO_BOLA );
+    return app.numeroAleatorioHasta(alto - 1.1*DIAMETRO_BOLA );//no comenzamos tocando los límites 1.1
   },
 
   numeroAleatorioHasta: function(limite){
@@ -93,8 +97,8 @@ var app={
   },
 
   detectaAgitacion: function(datosAceleracion){
-    var agitacionX = datosAceleracion.x > 10;
-    var agitacionY = datosAceleracion.y > 10;
+    var agitacionX = Math.abs(datosAceleracion.x) > 10;//puede ser negativa y lo tenemos en cuenta (abs)
+    var agitacionY = Math.abs(datosAceleracion.y) > 10;
 
     if (agitacionX || agitacionY){
       setTimeout(app.recomienza, 1000);
