@@ -31,7 +31,7 @@ var app={
     function create() {
       nivelText = game.add.text(16, 16, 'NIVEL:'+nivel, { fontSize: '50px', fill: '#757676' });
       maxText = game.add.text(16, 66, 'MÁXIMO:'+puntuacionMax, { fontSize: '50px', fill: '#757676' });
-      scoreText = game.add.text(16, 106, 'PUNTOS: '+puntuacion, { fontSize: '50px', fill: '#757676' });
+      scoreText = game.add.text(16, 106, 'PUNTOS: '+puntuacion, { fontSize: '50px', fill: '#656565' });
       
       objetivo = game.add.sprite(app.inicioX(), app.inicioY(), 'objetivo');
       bola = game.add.sprite(app.inicioX(), app.inicioY(), 'bola');
@@ -134,19 +134,17 @@ var app={
 	}
     }
 
-    //if (puntuacion > 0){
-      //dificultad = dificultad + 1;
-      dificultad=puntuacion-nivel*20;// si perdemos puntos lo suavizamos
-      if (dificultad<0) dificultad=0; // no permitimos dificultades negativas
-    //}
+    dificultad=puntuacion-nivel*20;// si perdemos puntos suavizamos la dificultad, y cada nivel comienza con movimientos suaves
+    if (dificultad<0) dificultad=0; // no permitimos dificultades negativas
+   
   },
 
   inicioX: function(){
-    return app.numeroAleatorioHasta(ancho - 1.1*DIAMETRO_BOLA );//no comenzamos tocando los límites 1.1
+    return app.numeroAleatorioHasta(ancho - 1.1*DIAMETRO_BOLA )+.05*DIAMETRO_BOLA;//no comenzamos tocando los límites 
   },
 
   inicioY: function(){
-    return app.numeroAleatorioHasta(alto - 1.1*DIAMETRO_BOLA );//no comenzamos tocando los límites 1.1
+    return app.numeroAleatorioHasta(alto - 1.1*DIAMETRO_BOLA )+.05*DIAMETRO_BOLA;//no comenzamos tocando los límites 
   },
 
   numeroAleatorioHasta: function(limite){
