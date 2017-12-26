@@ -75,6 +75,7 @@ var app={
   decrementaObstaculo: function(){
 	if (puntuacion > -10){ // solo bajamos hasta -10
 		puntuacion-=2;
+		if(puntuacion<-10) puntuacion= -10;
     		scoreText.text = 'PUNTOS: '+ puntuacion;
 	}
 	obstaculo.body.x = app.inicioX();
@@ -83,8 +84,9 @@ var app={
   decrementaObstaculo2: function(){
 	if (puntuacion > -10){ // solo bajamos hasta -10
 		puntuacion-=3;
+		if(puntuacion<-10) puntuacion= -10;
     		scoreText.text = 'PUNTOS: '+ puntuacion;
-        //maxText.text='MAX:'+puntuacionMax;
+
 	}
 	obstaculo2.body.x = app.inicioX();
 	obstaculo2.body.y = app.inicioY();
@@ -92,6 +94,7 @@ var app={
   decrementaObstaculo3: function(){
 	if (puntuacion > -10){ // solo bajamos hasta -10
 		puntuacion-=4;
+		if(puntuacion<-10) puntuacion= -10;
     		scoreText.text = 'PUNTOS: '+ puntuacion;
 	}
 	obstaculo3.body.x = app.inicioX();
@@ -131,11 +134,11 @@ var app={
 	}
     }
 
-    if (puntuacion > 0){
+    //if (puntuacion > 0){
       //dificultad = dificultad + 1;
       dificultad=puntuacion-nivel*20;// si perdemos puntos lo suavizamos
       if (dificultad<0) dificultad=0; // no permitimos dificultades negativas
-    }
+    //}
   },
 
   inicioX: function(){
