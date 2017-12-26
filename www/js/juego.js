@@ -29,8 +29,9 @@ var app={
     }
 
     function create() {
-      maxText = game.add.text(16, 16, 'MAX:'+puntuacionMax, { fontSize: '50px', fill: '#757676' });
-      scoreText = game.add.text(16, 66, puntuacion, { fontSize: '50px', fill: '#757676' });
+      nivelText = game.add.text(16, 16, 'NIVEL:'+nivel, { fontSize: '50px', fill: '#757676' });
+      maxText = game.add.text(16, 66, 'MÁXIMO:'+puntuacionMax, { fontSize: '50px', fill: '#757676' });
+      scoreText = game.add.text(16, 106, 'PUNTOS: '+puntuacion, { fontSize: '50px', fill: '#757676' });
       
       objetivo = game.add.sprite(app.inicioX(), app.inicioY(), 'objetivo');
       bola = game.add.sprite(app.inicioX(), app.inicioY(), 'bola');
@@ -67,14 +68,14 @@ var app={
   decrementaPuntuacion: function(){
     if (puntuacion > -10){ // solo bajamos hasta -10
 	puntuacion--;
-    	scoreText.text = puntuacion;
+    	scoreText.text = 'PUNTOS: '+ puntuacion;
     }
   },
 
   decrementaObstaculo: function(){
 	if (puntuacion > -10){ // solo bajamos hasta -10
 		puntuacion-=2;
-    		scoreText.text = puntuacion;
+    		scoreText.text = 'PUNTOS: '+ puntuacion;
 	}
 	obstaculo.body.x = app.inicioX();
 	obstaculo.body.y = app.inicioY();
@@ -82,7 +83,7 @@ var app={
   decrementaObstaculo2: function(){
 	if (puntuacion > -10){ // solo bajamos hasta -10
 		puntuacion-=3;
-    		scoreText.text = puntuacion;
+    		scoreText.text = 'PUNTOS: '+ puntuacion;
         //maxText.text='MAX:'+puntuacionMax;
 	}
 	obstaculo2.body.x = app.inicioX();
@@ -91,7 +92,7 @@ var app={
   decrementaObstaculo3: function(){
 	if (puntuacion > -10){ // solo bajamos hasta -10
 		puntuacion-=4;
-    		scoreText.text = puntuacion;
+    		scoreText.text = 'PUNTOS: '+ puntuacion;
 	}
 	obstaculo3.body.x = app.inicioX();
 	obstaculo3.body.y = app.inicioY();
@@ -100,14 +101,15 @@ var app={
   incrementaPuntuacion: function(){
     puntuacion = puntuacion+1;
     if (puntuacion>puntuacionMax) puntuacionMax=puntuacion;
-    scoreText.text = puntuacion;
-    maxText.text='MAX:'+puntuacionMax;
+    scoreText.text = 'PUNTOS: '+ puntuacion;
+    maxText.text='MÁXIMO:'+puntuacionMax;
     
     objetivo.body.x = app.inicioX();
     objetivo.body.y = app.inicioY();
     if(nivel==0){
 	if(puntuacion>20){
 		nivel=1;//pasamos de nivel
+                nivelText.text = 'NIVEL:'+nivel; 
 		obstaculo.body.x = app.inicioX(); //hacemos visible el obstaculo
 		obstaculo.body.y = app.inicioY();
 	}
@@ -115,6 +117,7 @@ var app={
     if(nivel==1){
 	if(puntuacion>40){
 		nivel=2;//pasamos de nivel
+                nivelText.text = 'NIVEL:'+nivel; 
 		obstaculo2.body.x = app.inicioX(); //hacemos visible el obstaculo
 		obstaculo2.body.y = app.inicioY();
 	}
@@ -122,6 +125,7 @@ var app={
     if(nivel==2){
 	if(puntuacion>60){
 		nivel=3;//pasamos de nivel
+                nivelText.text = 'NIVEL:'+nivel; 
 		obstaculo3.body.x = app.inicioX(); //hacemos visible el obstaculo
 		obstaculo3.body.y = app.inicioY();
 	}
